@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 
+    Copyright © 2022 Sergey
+	Desc File: Visualizator for Vector class
+-->
+
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+	<Type Name="Vector&lt;*&gt;">
+		<DisplayString>{{ size={m_iSize} }}</DisplayString>
+		
+		<Expand>
+			<Item Name="[size]" ExcludeView="simple">m_iSize</Item>
+			<Item Name="[reserv]" ExcludeView="simple">m_iReserveSize</Item>
+
+			<ArrayItems>
+				<Size>m_iSize</Size>
+				<ValuePointer>m_data</ValuePointer>
+			</ArrayItems>
+			
+		</Expand>
+	</Type>
+</AutoVisualizer>
+
