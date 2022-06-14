@@ -26,7 +26,10 @@ public:
 	~Vector( );
 
 	// Add to back
-	void AddToBack( T element );
+	void AddToBack( const T& element );
+
+	// Add to front
+	void AddToFront( const  T& element );
 
 	// Get Size
 	int size( );
@@ -37,6 +40,16 @@ public:
 	// Find by value 
 	bool FindVal( T val );
 	bool FindVal( T val, int& place );
+
+	// Get element
+	T GetFirstElement( );
+	T GetLastElement( );
+
+	// Remove 
+	void Remove( int id );
+
+	// Clear all vector
+	void ClearAll( );
 
 	// Operators
 	T& operator[]( int id );
@@ -80,13 +93,33 @@ inline Vector<T>::~Vector( )
    Add item to tail
 */
 template<class T>
-inline void Vector<T>::AddToBack( T element )
+inline void Vector<T>::AddToBack( const T& element )
 {
 	CheckSize( );
 
 	// Add To tail
 	m_data[ m_iSize ] = element;
 	m_iSize++;
+}
+
+/*
+   Add item to front
+*/
+template<class T>
+inline void Vector<T>::AddToFront( const T& element )
+{
+	m_iSize++;
+
+	// Shift elements
+	int size = m_iSize - 1;
+	if ( size > 0 )
+	{
+		int pos = 1;
+		memmove( &m_data[ pos ], &m_data[ 0 ], size * sizeof( T ) );
+	}
+
+	// Add
+	m_data[ 0 ] = element;
 }
 
 /*
@@ -139,6 +172,64 @@ inline bool Vector<T>::FindVal( T val, int& place )
 
 	place = ERROR_PLACE;
 	return false;
+}
+
+/*
+   Call destructor if exist
+*/
+template<class T>
+void CallDestructor( T* data )
+{
+	data->~T( );
+}
+
+template<class T>
+inline void Vector<T>::ClearAll( )
+{
+	delete[ ] m_data;
+
+	m_iSize = 0;
+	m_iReserveSize = 0;
+}
+
+/*
+   Get first element in vector
+*/
+template<class T>
+inline T Vector<T>::GetFirstElement( )
+{
+	return m_data[ 0 ];
+}
+
+/*
+   Get last element in vector
+*/
+template<class T>
+inline T Vector<T>::GetLastElement( )
+{
+	return m_data[ m_iSize - 1 ];
+}
+
+
+
+/*
+   Remove element by ID
+*/
+template<class T>
+inline void Vector<T>::Remove( int id )
+{
+	// Call destructor if exist ( for classes )
+	CallDestructor( &m_data[ id ] );
+
+	// Move element to tail
+	int size = m_iSize - id - 1;
+	if ( size > 0 )
+	{
+		memmove( &m_data[ id ], &m_data[ id + 1 ], size * sizeof( T ) );
+	}
+
+	// Decrease size
+	m_iSize--;
 }
 
 /*

@@ -1,0 +1,4 @@
+[ 06/14/2022 ]
+- Added 'AddToFront'
+- Added 'GetFirstElement' and 'GetLastElement'
+- Added 'ClearAll' - for clear all elements in vector

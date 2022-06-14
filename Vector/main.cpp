@@ -17,7 +17,7 @@ class AddMeInVector // :3
 public:
 	AddMeInVector( )
 	{
-		m_iId = 1;
+		m_iId = 0;
 		m_iVersion = 0x23112;
 		m_szName = "AddMeToVectorClass";
 	}
@@ -27,6 +27,8 @@ public:
 		m_iId = 0;
 		m_iVersion = 0;
 		m_szName = 0;
+
+		printf( "Destructor called!\n" );
 	}
 
 	int GetID( )
@@ -68,23 +70,27 @@ private:
 
 int main()
 {
-	Vector<long long>lg;
-	lg.AddToBack( 99999999999999999 );
-	lg.AddToBack( 28364718274182 );
-	lg.AddToBack( 61236123127312 );
+	AddMeInVector add;
+	Vector<AddMeInVector>classC;
+	add.SetID( 1);
+	add.SetName( "add 1" );
+	add.SetVersion( 1 );
+	classC.AddToBack( add );
 
-	lg.AddToBack( 17263237612637 );
+	add.SetID( 2 );
+	add.SetName( "add 2" );
+	add.SetVersion( 2 );
+	classC.AddToBack( add );
 
-	// is
-	if ( lg.isEmpty( ) )
-		return EXIT_FAILURE;
+	AddMeInVector first = classC.GetFirstElement( );
+	AddMeInVector last = classC.GetLastElement( );
 
-	printf( "%lld\n", lg[ 0 ] );
-	printf( "%lld\n", lg[ 1 ] );
-	printf( "%lld\n", lg[ 2 ] );
-	printf( "%lld\n", lg[ 3 ] );
+	classC.ClearAll( );
 
-	// Check assert
-	//printf( "%lld\n", lg[ 4 ] );
+	Vector<int>in;
+	in.AddToBack( 2 );
+	in.ClearAll( );
+
+	return 0;
 }
 
