@@ -5,3 +5,4 @@
 
 [ 06/16/2022 ]
 - Added 'Swap' for swapping vector elements
+- Fix minor flaws

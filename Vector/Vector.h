@@ -87,6 +87,7 @@ inline Vector<T>::Vector( )
 template<class T>
 inline Vector<T>::~Vector( )
 {
+	delete [] m_data;
 	m_data = 0;
 	m_iSize = 0;
 	m_iReserveSize = 0;
@@ -201,6 +202,8 @@ inline void Vector<T>::ClearAll( )
 template<class T>
 inline T Vector<T>::GetFirstElement( )
 {
+	assert( m_iSize > 0 );
+
 	return m_data[ 0 ];
 }
 
@@ -210,10 +213,10 @@ inline T Vector<T>::GetFirstElement( )
 template<class T>
 inline T Vector<T>::GetLastElement( )
 {
+	assert( m_iSize > 0 );
+
 	return m_data[ m_iSize - 1 ];
 }
-
-
 
 /*
    Remove element by ID

@@ -11,30 +11,38 @@
 
 #include "Vector.h"
 
+class CTest
+{
+public:
+	CTest( )
+	{
+		m_iIndex = 100;
+	}
+
+	~CTest( )
+	{
+		m_iIndex = -1;
+	}
+
+	int GetIndex( )
+	{
+		return m_iIndex;
+	}
+
+private:
+	int m_iIndex;
+};
+
 int main()
 {
-	Vector<const char*>swapTest;
+	Vector<CTest>w;
+	w.AddToBack( CTest( ) );
 	
-	swapTest.AddToBack( "This" );
-	swapTest.AddToBack( "string" );
-	swapTest.AddToBack( "for" );
-	swapTest.AddToBack( "test" );
-	swapTest.AddToBack( "swap" );
+	int index = w.GetLastElement( ).GetIndex( );
 
-	// Before
-	for ( int i = 0; i < swapTest.size( ); i++ )
-	{
-		printf( "%s ", swapTest[ i ] );
-	}
+	w.Remove( 0 );
 
-	swapTest.Swap( swapTest.size( ) - 1, 1 );
-	printf( "\n" );
-
-	// After
-	for ( int i = 0; i < swapTest.size( ); i++ )
-	{
-		printf( "%s ", swapTest[ i ] );
-	}
+	index = w.GetFirstElement( ).GetIndex( );
 
 	return 0;
 }
