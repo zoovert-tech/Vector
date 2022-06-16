@@ -54,6 +54,9 @@ public:
 	// Operators
 	T& operator[]( int id );
 
+	// Swap elements
+	void Swap( int id, int id2 );
+
 protected:
 	// Check size
 	void CheckSize( );
@@ -241,6 +244,19 @@ inline T& Vector<T>::operator[]( int id )
 	assert( ( unsigned )id < ( unsigned )m_iSize );
 
 	return m_data[ id ];
+}
+
+template<class T>
+inline void Vector<T>::Swap( int id, int id2 )
+{
+	assert( ( unsigned )id < ( unsigned )m_iSize );
+	assert( ( unsigned )id2 < ( unsigned )m_iSize );
+
+	T elem1 = m_data[ id ];
+	T elem2 = m_data[ id2 ];
+
+	m_data[ id2 ] = elem1;
+	m_data[ id ] = elem2;
 }
 
 /*
